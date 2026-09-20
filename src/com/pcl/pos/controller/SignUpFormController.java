@@ -1,5 +1,6 @@
 package com.pcl.pos.controller;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -11,4 +12,10 @@ public class SignUpFormController {
     public PasswordField txtPwd;
     public PasswordField txtCnfrmPwd;
     public AnchorPane cntxt;
+
+    public void signupOnAction(ActionEvent actionEvent) {
+    }
+
+    public void backToHomeOnAction(ActionEvent actionEvent) {
+    }
 }
