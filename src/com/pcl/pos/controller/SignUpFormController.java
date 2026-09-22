@@ -11,10 +11,7 @@ import javafx.stage.Stage;
 import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SignUpFormController {
     public TextField txtUsrNme;
@@ -33,16 +30,27 @@ public class SignUpFormController {
        String userId="USER-001";
        String roleId="AD-001";
 
+
        Class.forName("com.mysql.cj.jdbc.Driver");
       Connection connection= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nextstack_pos","root","1234");
-      String sql="INSERT INTO user VALUES" +
-              "('"+userId+"','"+userName+"','"+password+"','"+email+"','"+contact+"','"+roleId+"')";
-        Statement statement = connection.createStatement();
-        int count=statement.executeUpdate(sql);
-        System.out.println(count);
+        String sql="INSERT INTO user VALUES (?,?,?,?,?,?)";
+       PreparedStatement ps =connection.prepareStatement(sql);
+       ps.setString(1,"USER-002");
+       ps.setString(2,"ADMIN-2");
+       ps.setString(3,"4321");
+       ps.setString(4,"viraj@email.com");
+       ps.setString(5,"0701234567");
+       ps.setString(6,roleId);
+       ps.executeUpdate();
+
+
+
+
+
+
+
 
         //preapred
-
         //LOAD DRIVER
         //CREATE CONNECTION
         //WRITE QUERY
