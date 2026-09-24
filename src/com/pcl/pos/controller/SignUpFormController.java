@@ -1,6 +1,7 @@
 package com.pcl.pos.controller;
 
 import com.pcl.pos.model.User;
+import com.pcl.pos.utill.security.PasswordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,10 +29,10 @@ public class SignUpFormController {
        String contact=txtCntctNmbr.getText();
        String password=txtPwd.getText();
        String pwdConfirmation=txtCnfrmPwd.getText();
-       String userId="USER-003";
+       String userId="USER-001";
        String roleId="AD-001";
 
-       User user=new User(userId,userName,password,email,contact,roleId);
+       User user=new User(userId,userName,new PasswordManager().encode(password),email,contact,roleId);
 
         saveUser(user);
 
