@@ -29,11 +29,10 @@ public class SignUpFormController {
        String contact=txtCntctNmbr.getText();
        String password=txtPwd.getText();
        String pwdConfirmation=txtCnfrmPwd.getText();
-       String userId="USER-001";
+       String userId=setUserId();
        String roleId="AD-001";
 
        User user=new User(userId,userName,new PasswordManager().encode(password),email,contact,roleId);
-
         saveUser(user);
 
 
@@ -59,6 +58,25 @@ public class SignUpFormController {
         setUi("WelcomeForm");
     }
 
+
+    public String setUserId() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nextstack_pos","root","1234");
+        String sql="SELECT user_id FROM user ORDER BY user_id DESC LIMIT 1";
+        PreparedStatement ps =connection.prepareStatement(sql);
+       ResultSet set= ps.executeQuery();//SELECT
+        if (set.next()){
+            String lastID=set.getString("user_id"); //USER-1
+            String [] splitterArr=lastID.split("-");//[USER,1]
+           String lastCharacter= splitterArr[1];//"1"
+          int lastDigit= Integer.parseInt(lastCharacter);//1
+          lastDigit++;//2
+          return "USER-"+lastDigit;//USER-2
+            //USER-1
+        }
+        return "USER-1";
+
+    }
     public void setUi(String location) throws IOException {
         Parent parent= FXMLLoader.load(getClass().getResource
                 ("/com/pcl/pos/view/"+location+".fxml"));
