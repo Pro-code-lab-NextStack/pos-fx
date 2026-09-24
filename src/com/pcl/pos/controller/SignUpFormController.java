@@ -1,5 +1,6 @@
 package com.pcl.pos.controller;
 
+import com.pcl.pos.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,35 +28,30 @@ public class SignUpFormController {
        String contact=txtCntctNmbr.getText();
        String password=txtPwd.getText();
        String pwdConfirmation=txtCnfrmPwd.getText();
-       String userId="USER-001";
+       String userId="USER-003";
        String roleId="AD-001";
 
+       User user=new User(userId,userName,password,email,contact,roleId);
 
-       Class.forName("com.mysql.cj.jdbc.Driver");
-      Connection connection= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nextstack_pos","root","1234");
+        saveUser(user);
+
+
+    }
+
+    public boolean saveUser(User user) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nextstack_pos","root","1234");
         String sql="INSERT INTO user VALUES (?,?,?,?,?,?)";
-       PreparedStatement ps =connection.prepareStatement(sql);
-       ps.setString(1,"USER-002");
-       ps.setString(2,"ADMIN-2");
-       ps.setString(3,"4321");
-       ps.setString(4,"viraj@email.com");
-       ps.setString(5,"0701234567");
-       ps.setString(6,roleId);
-       ps.executeUpdate();
+        PreparedStatement ps =connection.prepareStatement(sql);
+        ps.setString(1,user.getId());
+        ps.setString(2,user.getUserName());
+        ps.setString(3,user.getPassword());
+        ps.setString(4,user.getEmail());
+        ps.setString(5,user.getContactNumber());
+        ps.setString(6,user.getUserRole());
+       int rowCount =ps.executeUpdate();
+        return rowCount>0;
 
-
-
-
-
-
-
-
-        //preapred
-        //LOAD DRIVER
-        //CREATE CONNECTION
-        //WRITE QUERY
-        //CREATE STATEMENT
-        //EXECUTE
     }
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
