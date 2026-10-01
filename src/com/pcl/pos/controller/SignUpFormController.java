@@ -70,8 +70,8 @@ public class SignUpFormController {
             String [] splitterArr=lastID.split("-");//[USER,1]
            String lastCharacter= splitterArr[1];//"1"
           int lastDigit= Integer.parseInt(lastCharacter);//1
-          lastDigit++;//2
-          return "USER-"+lastDigit;//USER-2
+          int lastDigitFinal=++lastDigit;//2
+          return "USER-"+lastDigitFinal;//USER-2
             //USER-1
         }
         return "USER-1";
