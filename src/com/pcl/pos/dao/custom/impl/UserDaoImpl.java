@@ -1,6 +1,7 @@
 package com.pcl.pos.dao.custom.impl;
 
 import com.pcl.pos.dao.custom.UserDao;
+import com.pcl.pos.db.DbConnection;
 import com.pcl.pos.entity.User;
 
 import java.sql.Connection;
@@ -17,8 +18,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean save(User user) throws ClassNotFoundException, SQLException {
-      Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nextstack_pos","root","1234");
+        Connection connection = DbConnection.getInstance().getConnection();
         String sql="INSERT INTO user VALUES (?,?,?,?,?,?)";
         PreparedStatement ps =connection.prepareStatement(sql);
         ps.setString(1,user.getUserId());
