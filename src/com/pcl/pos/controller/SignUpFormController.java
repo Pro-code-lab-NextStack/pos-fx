@@ -1,5 +1,8 @@
 package com.pcl.pos.controller;
 
+import com.pcl.pos.bo.custom.UserBo;
+import com.pcl.pos.bo.custom.impl.UserBoImpl;
+import com.pcl.pos.dto.request.UserRequestDto;
 import com.pcl.pos.model.User;
 import com.pcl.pos.utill.security.PasswordManager;
 import javafx.event.ActionEvent;
@@ -22,61 +25,34 @@ public class SignUpFormController {
     public PasswordField txtPwd;
     public PasswordField txtCnfrmPwd;
     public AnchorPane cntxt;
+    UserBo userBo=new UserBoImpl();
+    public void signupOnAction(ActionEvent actionEvent)  {
+        try {
+            boolean isRegisterd= userBo.registerUser(new UserRequestDto(
+                    txtUsrNme.getText(),
+                    txtEml.getText(),
+                    txtPwd.getText(),
+                    txtCntctNmbr.getText()
 
-    public void signupOnAction(ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
-       String userName =txtUsrNme.getText();
-       String email=txtEml.getText();
-       String contact=txtCntctNmbr.getText();
-       String password=txtPwd.getText();
-       String pwdConfirmation=txtCnfrmPwd.getText();
-       String userId=setUserId();
-       String roleId="AD-001";
-
-       User user=new User(userId,userName,new PasswordManager().encode(password),email,contact,roleId);
-        saveUser(user);
-
-
-    }
-
-    public boolean saveUser(User user) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nextstack_pos","root","1234");
-        String sql="INSERT INTO user VALUES (?,?,?,?,?,?)";
-        PreparedStatement ps =connection.prepareStatement(sql);
-        ps.setString(1,user.getId());
-        ps.setString(2,user.getUserName());
-        ps.setString(3,user.getPassword());
-        ps.setString(4,user.getEmail());
-        ps.setString(5,user.getContactNumber());
-        ps.setString(6,user.getUserRole());
-       int rowCount =ps.executeUpdate();
-        return rowCount>0;
+            ));
+            if (isRegisterd){
+                System.out.println("done.....");
+                return;
+            }
+            System.out.println("error occured");
+        }catch (ClassNotFoundException | SQLException e){
+            e.printStackTrace();
+        }
 
     }
+
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
         setUi("WelcomeForm");
     }
 
 
-    public String setUserId() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nextstack_pos","root","1234");
-        String sql="SELECT user_id FROM user ORDER BY user_id DESC LIMIT 1";
-        PreparedStatement ps =connection.prepareStatement(sql);
-       ResultSet set= ps.executeQuery();//SELECT
-        if (set.next()){
-            String lastID=set.getString("user_id"); //USER-1
-            String [] splitterArr=lastID.split("-");//[USER,1]
-           String lastCharacter= splitterArr[1];//"1"
-          int lastDigit= Integer.parseInt(lastCharacter);//1
-          int lastDigitFinal=++lastDigit;//2
-          return "USER-"+lastDigitFinal;//USER-2
-            //USER-1
-        }
-        return "USER-1";
 
-    }
     public void setUi(String location) throws IOException {
         Parent parent= FXMLLoader.load(getClass().getResource
                 ("/com/pcl/pos/view/"+location+".fxml"));
