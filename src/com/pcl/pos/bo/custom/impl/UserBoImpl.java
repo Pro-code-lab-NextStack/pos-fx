@@ -15,12 +15,12 @@ public class UserBoImpl implements UserBo {
     UserDao userDao=new UserDaoImpl();
     @Override
     public boolean registerUser(UserRequestDto dto) throws SQLException, ClassNotFoundException {
-        userDao.save(new User(UUID.randomUUID().toString(),
+       return userDao.save(new User(UUID.randomUUID().toString(),
                 dto.getUserName(),
                 new PasswordManager().encode(dto.getRowPw()),
                 dto.getEmail(),
                 dto.getContact(),
                 "AD-001"));
-        return false;
+      //factory method -
     }
 }

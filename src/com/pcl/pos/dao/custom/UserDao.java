@@ -3,6 +3,8 @@ package com.pcl.pos.dao.custom;
 import com.pcl.pos.dao.CrudDao;
 import com.pcl.pos.entity.User;
 
+import java.sql.SQLException;
+
 public interface UserDao extends CrudDao<User,String> {
-    public User findByEmail(String email);
+    public User findByEmail(String email) throws SQLException, ClassNotFoundException;
 }
