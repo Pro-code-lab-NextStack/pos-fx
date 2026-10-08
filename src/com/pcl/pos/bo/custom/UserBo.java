@@ -7,4 +7,6 @@ import java.sql.SQLException;
 
 public interface UserBo extends SuperBo {
     public boolean registerUser(UserRequestDto dto) throws SQLException, ClassNotFoundException;
+    public boolean isExists(String email) throws SQLException, ClassNotFoundException;
+
 }
