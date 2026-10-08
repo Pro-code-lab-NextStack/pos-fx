@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -26,7 +27,7 @@ public class SignUpFormController {
     public PasswordField txtCnfrmPwd;
     public AnchorPane cntxt;
     UserBo userBo=new UserBoImpl();
-    public void signupOnAction(ActionEvent actionEvent)  {
+    public void signupOnAction(ActionEvent actionEvent) throws IOException {
         try {
             boolean isRegisterd= userBo.registerUser(new UserRequestDto(
                     txtUsrNme.getText(),
@@ -36,10 +37,12 @@ public class SignUpFormController {
 
             ));
             if (isRegisterd){
-                System.out.println("done.....");
+               new Alert(Alert.AlertType.INFORMATION,"Registration Success...").show();
+               setUi("LoginForm");
+
                 return;
             }
-            System.out.println("error occured");
+                 new Alert(Alert.AlertType.ERROR,"Some thing went wrong").show();
         }catch (ClassNotFoundException | SQLException e){
             e.printStackTrace();
         }
