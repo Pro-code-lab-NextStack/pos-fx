@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="dashboardContext" prefHeight="428.0" prefWidth="470.0" style="-fx-background-color: rgba(156, 136, 255,0.5);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pcl.pos.controller.DashboardFormController">
+   <children>
+      <Label layoutX="27.0" layoutY="40.0" prefHeight="61.0" prefWidth="358.0" text="Day Revenue" textFill="#192a56">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="114.0" prefHeight="61.0" prefWidth="358.0" text="Customer Attendance" textFill="#192a56">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="184.0" prefHeight="61.0" prefWidth="358.0" text="Low Stock Products" textFill="#192a56">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="245.0" prefHeight="61.0" prefWidth="358.0" text="Return Products" textFill="#192a56">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="312.0" prefHeight="61.0" prefWidth="358.0" text="Employee Attendance" textFill="#192a56">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
