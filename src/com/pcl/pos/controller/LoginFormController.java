@@ -30,7 +30,7 @@ public class LoginFormController {
          ResponseUserDto dto =userBo.login(new UserRequestDto(null,txtEmail.getText(),txtPwd.getText(),null));
          if (dto.getCode()==200){
              new Alert(Alert.AlertType.INFORMATION,dto.getMessage()).show();
-             setUi("DashboardForm");
+             setUi("SuperAdminForm");
          } else if (dto.getCode()==401) {
              new Alert(Alert.AlertType.WARNING,dto.getMessage()).show();
 

@@ -5,7 +5,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
-public class DashboardFormController {
+public class SuperAdminFormController {
     public AnchorPane mainContext;
     public AnchorPane leftContext;
     public AnchorPane dynamicContext;
