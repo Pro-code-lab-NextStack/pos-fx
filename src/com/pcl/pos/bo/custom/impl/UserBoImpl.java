@@ -5,11 +5,15 @@ import com.pcl.pos.dao.SuperDao;
 import com.pcl.pos.dao.custom.UserDao;
 import com.pcl.pos.dao.custom.impl.UserDaoImpl;
 import com.pcl.pos.dto.request.UserRequestDto;
+import com.pcl.pos.dto.response.ResponseRolesDto;
 import com.pcl.pos.dto.response.ResponseUserDto;
+import com.pcl.pos.entity.Role;
 import com.pcl.pos.entity.User;
 import com.pcl.pos.utill.security.PasswordManager;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class UserBoImpl implements UserBo {
@@ -58,6 +62,21 @@ public class UserBoImpl implements UserBo {
                 user.getUserName(),
                 404,
                 "User not found");
+    }
+
+    @Override
+    public List<ResponseRolesDto> fetchAllRoles() throws SQLException, ClassNotFoundException {
+        List<ResponseRolesDto> dtoList=new ArrayList<>();
+        List<Role> roles=userDao.getAllRoles();
+        for (Role r:roles){
+            dtoList.add(new ResponseRolesDto(
+                    r.getId(),
+                    r.getName(),
+                    200,
+                    "success"
+            ));
+        }
+        return dtoList;
     }
 
 
