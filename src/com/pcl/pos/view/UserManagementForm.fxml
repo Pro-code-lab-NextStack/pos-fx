@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="userManagementContext" prefHeight="428.0" prefWidth="470.0" style="-fx-background-color: rgba(156, 136, 255,0.5);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pcl.pos.controller.DashboardFormController">
+<AnchorPane fx:id="userManagementContext" prefHeight="428.0" prefWidth="470.0" style="-fx-background-color: rgba(156, 136, 255,0.5);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pcl.pos.controller.UserManagementFormController">
    <children>
       <Label layoutX="28.0" layoutY="14.0" text="User Management" textFill="#192a56">
          <font>

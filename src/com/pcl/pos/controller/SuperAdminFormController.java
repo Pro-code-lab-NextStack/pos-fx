@@ -19,6 +19,10 @@ public class SuperAdminFormController {
     public void navigateDashBoardOnAction(ActionEvent actionEvent) throws IOException {
         setUi("DashboardForm");
     }
+
+    public void navigateUserManagementOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("UserManagementForm");
+    }
     private void setUi(String location) throws IOException {
         dynamicContext.getChildren().clear();
         dynamicContext.getChildren().add(
@@ -27,4 +31,6 @@ public class SuperAdminFormController {
                                 ("/com/pcl/pos/view/"+location+".fxml"))
         );
     }
+
+
 }

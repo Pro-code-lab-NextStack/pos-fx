@@ -5,13 +5,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane fx:id="mainContext" prefHeight="458.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pcl.pos.controller.SuperAdminFormController">
    <children>
       <AnchorPane fx:id="leftContext" layoutY="30.0" prefHeight="428.0" prefWidth="200.0" style="-fx-background-color: #40739e;">
          <children>
             <Button layoutX="16.0" layoutY="30.0" mnemonicParsing="false" onAction="#navigateDashBoardOnAction" prefHeight="26.0" prefWidth="169.0" text="DashBoard" />
-            <Button layoutX="16.0" layoutY="69.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="169.0" text="User Management" />
+            <Button layoutX="16.0" layoutY="69.0" mnemonicParsing="false" onAction="#navigateUserManagementOnAction" prefHeight="26.0" prefWidth="169.0" text="User Management" />
             <Button layoutX="16.0" layoutY="112.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="169.0" text="Sales Reports" />
             <Button layoutX="16.0" layoutY="154.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="169.0" text="Customer Management" />
             <Button layoutX="16.0" layoutY="198.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="169.0" text="Vendors Management" />

@@ -2,9 +2,11 @@ package com.pcl.pos.dao.custom.impl;
 
 import com.pcl.pos.dao.custom.UserDao;
 import com.pcl.pos.db.DbConnection;
+import com.pcl.pos.entity.Role;
 import com.pcl.pos.entity.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
@@ -26,6 +28,20 @@ public class UserDaoImpl implements UserDao {
         }
         return null;
 
+    }
+
+    @Override
+    public List<Role> getAllRoles() throws SQLException, ClassNotFoundException {
+        List<Role> roleList=new ArrayList<>();
+        Connection connection=DbConnection.getInstance().getConnection();
+        String sql="SELECT * FROM role";
+        PreparedStatement ps =connection.prepareStatement(sql);
+        ResultSet set =ps.executeQuery();
+        while (set.next()){
+            roleList.add(new Role(set.getNString(1),
+                    set.getString(2)));
+        }
+        return roleList;
     }
 
     @Override
