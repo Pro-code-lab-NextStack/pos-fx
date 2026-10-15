@@ -22,20 +22,22 @@ public class UserBoImpl implements UserBo {
     @Override
     public boolean registerUser(UserRequestDto dto) throws SQLException, ClassNotFoundException {
         if (isExists(dto.getEmail())==null){
-            return false;
+            if (dto.getRoleId()==null){
+                roleId="AD-001";
+            }else {
+                roleId= dto.getRoleId();
+            }
+            System.out.println(roleId);
+            return userDao.save(new User(UUID.randomUUID().toString(),
+                    dto.getUserName(),
+                    new PasswordManager().encode(dto.getRowPw()),
+                    dto.getEmail(),
+                    dto.getContact(), roleId));
 
         }
 
-        if (dto.getRoleId()==null){
-            roleId="AD-001";
-        }else {
-           roleId= dto.getRoleId();
-        }
-        return userDao.save(new User(UUID.randomUUID().toString(),
-                dto.getUserName(),
-                new PasswordManager().encode(dto.getRowPw()),
-                dto.getEmail(),
-                dto.getContact(), roleId));
+     return false;
+
 
     }
 
