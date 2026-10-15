@@ -33,7 +33,8 @@ public class SignUpFormController {
                     txtUsrNme.getText(),
                     txtEml.getText(),
                     txtPwd.getText(),
-                    txtCntctNmbr.getText()
+                    txtCntctNmbr.getText(),
+                    null
 
             ));
             if (isRegisterd){

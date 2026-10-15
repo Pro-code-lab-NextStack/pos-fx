@@ -18,18 +18,24 @@ import java.util.UUID;
 
 public class UserBoImpl implements UserBo {
     UserDao userDao=new UserDaoImpl();
+    String roleId;
     @Override
     public boolean registerUser(UserRequestDto dto) throws SQLException, ClassNotFoundException {
         if (isExists(dto.getEmail())==null){
             return false;
 
         }
+
+        if (dto.getRoleId()==null){
+            roleId="AD-001";
+        }else {
+           roleId= dto.getRoleId();
+        }
         return userDao.save(new User(UUID.randomUUID().toString(),
                 dto.getUserName(),
                 new PasswordManager().encode(dto.getRowPw()),
                 dto.getEmail(),
-                dto.getContact(),
-                "AD-001"));
+                dto.getContact(), roleId));
 
     }
 

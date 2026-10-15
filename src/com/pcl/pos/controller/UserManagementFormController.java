@@ -2,6 +2,7 @@ package com.pcl.pos.controller;
 
 import com.pcl.pos.bo.custom.UserBo;
 import com.pcl.pos.bo.custom.impl.UserBoImpl;
+import com.pcl.pos.dto.request.UserRequestDto;
 import com.pcl.pos.dto.response.ResponseRolesDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,6 +53,31 @@ public class UserManagementFormController {
     }
 
     public void saveOnAction(ActionEvent actionEvent) {
+        try {
+           boolean isSaved= userBo.registerUser(new UserRequestDto(
+                    txtUsrName.getText(),
+                    txtEmail.getText(),
+                    txtPwd.getText(),
+                    txtContactNumber.getText(),
+                    splitRoleId(cmbRole.getValue())
 
+
+            ));
+           if (isSaved){
+               System.out.println("done");
+           }
+        }catch (SQLException |ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+
+
+
+    }
+    public String splitRoleId(String comboText){
+        String arr[]=comboText.split("-");
+       String roleId= arr[0]+"-"+arr[1];
+        System.out.println(roleId);
+       return roleId;
     }
 }

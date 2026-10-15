@@ -5,15 +5,25 @@ public class UserRequestDto {
     private String email;
     private String rowPw;
     private String contact;
+    private String roleId;
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
 
     public UserRequestDto() {
     }
 
-    public UserRequestDto(String userName, String email, String rowPw, String contact) {
+    public UserRequestDto(String userName, String email, String rowPw, String contact,String roleId) {
         this.userName = userName;
         this.email = email;
         this.rowPw = rowPw;
         this.contact = contact;
+        this.roleId=roleId;
     }
 
     public void setUserName(String userName) {

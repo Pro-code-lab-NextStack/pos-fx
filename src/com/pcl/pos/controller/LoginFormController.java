@@ -27,7 +27,7 @@ public class LoginFormController {
 
     public void loginOnAction(ActionEvent actionEvent) throws IOException {
         try {
-         ResponseUserDto dto =userBo.login(new UserRequestDto(null,txtEmail.getText(),txtPwd.getText(),null));
+         ResponseUserDto dto =userBo.login(new UserRequestDto(null,txtEmail.getText(),txtPwd.getText(),null,null));
          if (dto.getCode()==200){
              new Alert(Alert.AlertType.INFORMATION,dto.getMessage()).show();
              setUi("SuperAdminForm");
