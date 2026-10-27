@@ -58,16 +58,22 @@ public class UserBoImpl implements UserBo {
            if (new PasswordManager().check(dto.getRowPw(),user.getPassword())){
                return new ResponseUserDto(user.getEmail(),
                        user.getUserName(),
+                       user.getUserId(),
+                       user.getRoleId(),
                        200,
                        "done....");
            }
            return new ResponseUserDto(user.getEmail(),
                    user.getUserName(),
+                   user.getUserId(),
+                   user.getRoleId(),
                    401,
                    "Incorrect password please check your pwd....");
        }
       return   new ResponseUserDto(user.getEmail(),
                 user.getUserName(),
+              user.getUserId(),
+              user.getRoleId(),
                 404,
                 "User not found");
     }
@@ -85,6 +91,25 @@ public class UserBoImpl implements UserBo {
             ));
         }
         return dtoList;
+    }
+
+    @Override
+    public List<ResponseUserDto> getAllUsers() throws SQLException, ClassNotFoundException {
+        List<User> userList= userDao.findAll();
+        List<ResponseUserDto> users=new ArrayList<>();
+        for (User u:userList){
+            users.add(new ResponseUserDto(
+                    u.getEmail(),
+                    u.getUserName(),
+                    u.getUserId(),
+                    u.getRoleId(),
+                    200,
+                    "ok"
+            ));
+        }
+
+        return users;
+
     }
 
 

@@ -14,4 +14,5 @@ public interface UserBo extends SuperBo {
     public User isExists(String email) throws SQLException, ClassNotFoundException;
     public ResponseUserDto login(UserRequestDto dto) throws SQLException, ClassNotFoundException;
     public List<ResponseRolesDto> fetchAllRoles() throws SQLException, ClassNotFoundException;
+    public List<ResponseUserDto> getAllUsers() throws SQLException, ClassNotFoundException;
 }
