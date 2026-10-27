@@ -4,6 +4,8 @@ import com.pcl.pos.bo.custom.UserBo;
 import com.pcl.pos.bo.custom.impl.UserBoImpl;
 import com.pcl.pos.dto.request.UserRequestDto;
 import com.pcl.pos.dto.response.ResponseRolesDto;
+import com.pcl.pos.dto.response.ResponseUserDto;
+import com.pcl.pos.view.tm.UserTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,6 +36,29 @@ public class UserManagementFormController {
     UserBo userBo=new UserBoImpl();
     public void initialize(){
         setRoleData();
+        setTableData();
+    }
+
+    private void setTableData() {
+        try {
+            List<ResponseUserDto> userDtos=userBo.getAllUsers();
+            ObservableList<UserTm> userObList=FXCollections.observableArrayList();
+            for (ResponseUserDto dto:userDtos){
+                Button btn=new Button("Delete");
+                UserTm userTm=new UserTm(
+                        dto.getUserId(),
+                        dto.getUserName(),
+                        dto.getEmail(),
+                        dto.getRoleName(),
+                        btn
+                );
+                userObList.add(userTm);
+            }
+            tblUsers.setItems(userObList);
+
+        }catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     private void setRoleData() {
