@@ -7,7 +7,7 @@ import java.util.List;
 public interface CrudDao <T,ID> extends SuperDao {
     public boolean save(T t) throws ClassNotFoundException, SQLException;
     public boolean update(T t);
-    public boolean delete(ID id);
+    public boolean delete(ID id) throws SQLException, ClassNotFoundException;
     public T findById(ID id);
     public List<T> findAll() throws SQLException, ClassNotFoundException;
 }

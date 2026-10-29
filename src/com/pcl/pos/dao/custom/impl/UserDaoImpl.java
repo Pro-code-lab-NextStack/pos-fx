@@ -46,7 +46,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean save(User user) throws ClassNotFoundException, SQLException {
-        System.out.println(user.toString());
+
         Connection connection = DbConnection.getInstance().getConnection();
         String sql="INSERT INTO user VALUES (?,?,?,?,?,?)";
         PreparedStatement ps =connection.prepareStatement(sql);
@@ -57,7 +57,6 @@ public class UserDaoImpl implements UserDao {
         ps.setString(5,user.getContactNumber());
         ps.setString(6,user.getRoleId());
        int rowsCount= ps.executeUpdate();
-        System.out.println(rowsCount);
       return rowsCount>0;
 
 
@@ -69,8 +68,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean delete(String s) {
-        return false;
+    public boolean delete(String s) throws SQLException, ClassNotFoundException {
+       Connection connection =DbConnection.getInstance().getConnection();
+       String sql="DELETE FROM user WHERE id=?";
+       PreparedStatement ps =connection.prepareStatement(sql);
+       ps.setString(1,s);
+      return ps.executeUpdate()>0;
     }
 
     @Override
