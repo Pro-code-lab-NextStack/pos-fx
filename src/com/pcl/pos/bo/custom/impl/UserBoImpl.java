@@ -123,7 +123,7 @@ public class UserBoImpl implements UserBo {
 
     @Override
     public boolean updateUser(UserRequestDto dto,String id) throws SQLException, ClassNotFoundException {
-        boolean isUpdate=userDao.update(new User(
+      return userDao.update(new User(
                 id,
                 dto.getUserName(),
                 null,
@@ -131,6 +131,8 @@ public class UserBoImpl implements UserBo {
                 dto.getContact(),
                 dto.getRoleId()
         ));
+
+
     }
 
 

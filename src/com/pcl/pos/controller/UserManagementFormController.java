@@ -45,6 +45,23 @@ public class UserManagementFormController {
         setRoleData();
         setTableData();
 
+        tblUser.getSelectionModel().selectedItemProperty().
+                addListener((observable,oldValue,newValue )-> {
+                    if (newValue!=null){
+                        setData((UserTm)newValue);
+
+                    }
+                });
+
+    }
+
+    private void setData(UserTm newValue) {
+        btnSave.setText("Update");
+        txtEmail.setText(newValue.getEmail());
+        cmbRole.setValue(newValue.getRole());
+        txtUsrName.setText(newValue.getUserName());
+        txtPwd.setText(newValue.getId());
+
     }
 
     private void setTableData() {

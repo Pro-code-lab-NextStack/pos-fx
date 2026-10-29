@@ -65,14 +65,13 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean update(User user) throws SQLException, ClassNotFoundException {
     Connection connection = DbConnection.getInstance().getConnection();
-    String sql="UPDATE user SET user_name=?,email=?,contact_number=?,role_id=? WHERE user_id=?";
+    String sql="UPDATE user SET user_name=?,email=?,role_id=? WHERE user_id=?";
     PreparedStatement ps = connection.prepareStatement(sql);
     ps.setString(1,user.getUserName());
 
     ps.setString(2,user.getEmail());
-    ps.setString(3,user.getContactNumber());
-    ps.setString(4, user.getRoleId());
-    ps.setString(5,user.getUserId());
+    ps.setString(3, user.getRoleId());
+    ps.setString(4,user.getUserId());
     return ps.executeUpdate()>0;
 
     }
