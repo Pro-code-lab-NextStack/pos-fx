@@ -112,5 +112,14 @@ public class UserBoImpl implements UserBo {
 
     }
 
+    @Override
+    public boolean deleteUserById(String id) throws SQLException, ClassNotFoundException {
+      boolean isDeleted=userDao.delete(id);
+      if (isDeleted){
+          return true;
+      }
+      return false;
+    }
+
 
 }

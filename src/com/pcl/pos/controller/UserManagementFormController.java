@@ -60,6 +60,26 @@ public class UserManagementFormController {
                         dto.getRoleName(),
                         btn
                 );
+                btn.setOnAction((event->{
+                    Alert alert=new Alert(Alert.AlertType.CONFIRMATION,
+                            "Are you sure you want to delete this user ?",
+                            ButtonType.YES,ButtonType.NO);
+                    alert.showAndWait();
+                    if (alert.getResult()==ButtonType.YES){
+                        try {
+                           boolean isDeleted=userBo.deleteUserById(dto.getUserId());
+                           if (isDeleted){
+                               new Alert(Alert.AlertType.INFORMATION,"User Deleted").show();
+                               setTableData();
+                               return;
+                           }
+                            new Alert(Alert.AlertType.WARNING,"Something went wrong").show();
+
+                        }catch (ClassNotFoundException|SQLException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }));
                 userObList.add(userTm);
             }
             tblUser.setItems(userObList);
