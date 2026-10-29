@@ -121,5 +121,17 @@ public class UserBoImpl implements UserBo {
       return false;
     }
 
+    @Override
+    public boolean updateUser(UserRequestDto dto,String id) throws SQLException, ClassNotFoundException {
+        boolean isUpdate=userDao.update(new User(
+                id,
+                dto.getUserName(),
+                null,
+                dto.getEmail(),
+                dto.getContact(),
+                dto.getRoleId()
+        ));
+    }
+
 
 }

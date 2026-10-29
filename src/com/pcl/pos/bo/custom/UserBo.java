@@ -16,4 +16,5 @@ public interface UserBo extends SuperBo {
     public List<ResponseRolesDto> fetchAllRoles() throws SQLException, ClassNotFoundException;
     public List<ResponseUserDto> getAllUsers() throws SQLException, ClassNotFoundException;
     public boolean deleteUserById(String id) throws SQLException, ClassNotFoundException;
+    public boolean updateUser(UserRequestDto dto,String id) throws SQLException, ClassNotFoundException;
 }
