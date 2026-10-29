@@ -62,6 +62,8 @@ public class UserManagementFormController {
         txtUsrName.setText(newValue.getUserName());
         txtPwd.setText(newValue.getId());
 
+
+
     }
 
     private void setTableData() {
@@ -124,18 +126,38 @@ public class UserManagementFormController {
 
     public void saveOnAction(ActionEvent actionEvent) {
         try {
-           boolean isSaved= userBo.registerUser(new UserRequestDto(
-                    txtUsrName.getText(),
-                    txtEmail.getText(),
-                    txtPwd.getText(),
-                    txtContactNumber.getText(),
-                    splitRoleId(cmbRole.getValue())
+            if (btnSave.getText()=="Save User"){
+                boolean isSaved= userBo.registerUser(new UserRequestDto(
+                        txtUsrName.getText(),
+                        txtEmail.getText(),
+                        txtPwd.getText(),
+                        txtContactNumber.getText(),
+                        splitRoleId(cmbRole.getValue())
 
 
-            ));
-           if (isSaved){
-               System.out.println("done");
-           }
+                ));
+                if (isSaved){
+                    System.out.println("done");
+                }
+            }else {
+                boolean isUpdated= userBo.updateUser(new UserRequestDto(
+                        txtUsrName.getText(),
+                        txtEmail.getText(),
+                        null,
+                        null,
+                        cmbRole.getValue()
+                ), txtPwd.getText());
+                if (isUpdated){
+                    btnSave.setText("Save User");
+                    new Alert(Alert.AlertType.INFORMATION,"User Updated : "+txtUsrName.getText()).show();
+                    setTableData();
+                    return;
+                }
+                new Alert(Alert.AlertType.WARNING,"SOMETHING WENT WRONG... ").show();
+
+
+            }
+
         }catch (SQLException |ClassNotFoundException e){
             e.printStackTrace();
         }
