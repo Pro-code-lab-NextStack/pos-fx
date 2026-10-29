@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.sql.SQLException;
@@ -25,18 +26,25 @@ public class UserManagementFormController {
     public RadioButton rdoApproved;
     public ToggleGroup status;
     public RadioButton rdoPending;
-    public TableView tblUsers;
-    public TableColumn colId;
-    public TableColumn colUserName;
-    public TableColumn colEmail;
-    public TableColumn colRole;
-    public TableColumn colOption;
+    public TableView <UserTm>tblUser;
+    public TableColumn <UserTm,String>colId;
+    public TableColumn<UserTm,String> colUserName;
+    public TableColumn<UserTm,String> colEmail;
+    public TableColumn<UserTm,String> colRole;
+    public TableColumn <UserTm,Button>colOption;
     public Button btnSave;
 
     UserBo userBo=new UserBoImpl();
     public void initialize(){
+        
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
         setRoleData();
         setTableData();
+
     }
 
     private void setTableData() {
@@ -54,7 +62,7 @@ public class UserManagementFormController {
                 );
                 userObList.add(userTm);
             }
-            tblUsers.setItems(userObList);
+            tblUser.setItems(userObList);
 
         }catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
