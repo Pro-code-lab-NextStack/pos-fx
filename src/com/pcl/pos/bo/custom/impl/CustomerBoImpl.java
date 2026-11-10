@@ -4,9 +4,12 @@ import com.pcl.pos.bo.custom.CustomerBo;
 import com.pcl.pos.dao.custom.CustomerDao;
 import com.pcl.pos.dao.custom.impl.CustomerDaoImpl;
 import com.pcl.pos.dto.request.CustomerRequestDto;
+import com.pcl.pos.dto.response.ResponseCustomerDto;
 import com.pcl.pos.entity.Customer;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class CustomerBoImpl implements CustomerBo {
@@ -22,5 +25,23 @@ public class CustomerBoImpl implements CustomerBo {
                 dto.getEmail()
         ));
 
+    }
+
+    @Override
+    public List<ResponseCustomerDto> getAllCustomers() throws SQLException, ClassNotFoundException {
+       List<Customer> customerList= customerDao.findAll();
+       List<ResponseCustomerDto> dtoList=new ArrayList<>();
+       for (Customer c:customerList){
+           dtoList.add(new ResponseCustomerDto(
+                   c.getId(),
+                   c.getName(),
+                   c.getSalary(),
+                   c.getContact(),
+                   c.getAddress(),
+                   c.getEmail()
+           ));
+       }
+
+        return dtoList;
     }
 }
