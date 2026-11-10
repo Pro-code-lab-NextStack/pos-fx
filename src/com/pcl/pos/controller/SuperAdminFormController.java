@@ -23,6 +23,10 @@ public class SuperAdminFormController {
     public void navigateUserManagementOnAction(ActionEvent actionEvent) throws IOException {
         setUi("UserManagementForm");
     }
+
+    public void navigateCustomerManagementOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("CustomerManagementForm");
+    }
     private void setUi(String location) throws IOException {
         dynamicContext.getChildren().clear();
         dynamicContext.getChildren().add(
