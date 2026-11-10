@@ -6,8 +6,11 @@ import com.pcl.pos.entity.Customer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public  class CustomerDaoImpl implements CustomerDao {
     @Override
@@ -44,6 +47,21 @@ public  class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public List<Customer> findAll() throws SQLException, ClassNotFoundException {
-        return List.of();
+        List <Customer> customerList=new ArrayList<>();
+     Connection connection = DbConnection.getInstance().getConnection();
+     String sql="SELECT * FROM customer";
+     PreparedStatement ps=connection.prepareStatement(sql);
+    ResultSet rs= ps.executeQuery();
+    while (rs.next()){
+        customerList.add(new Customer(
+             rs.getString(1) ,
+             rs.getString(2),
+             rs.getDouble(3),
+             rs.getString(4),
+             rs.getString(5),
+             rs.getString(6)
+        ));
+    }
+    return customerList;
     }
 }
