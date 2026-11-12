@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="context" prefHeight="428.0" prefWidth="470.0" style="-fx-background-color: rgba(156, 136, 255,0.5);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pcl.pos.controller.CustomerManagementFormController">
    <children>
       <Label layoutX="25.0" layoutY="24.0" text="Customer  Management" textFill="#192a56">
@@ -32,7 +31,7 @@
             <TableColumn fx:id="colOption" text="Option" />
          </columns>
       </TableView>
-      <Button fx:id="btnSave" layoutX="303.0" layoutY="109.0" mnemonicParsing="false" onAction="#saveOnAction" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #192a56;" text="Save User" textFill="WHITE" />
+      <Button fx:id="btnSave" layoutX="303.0" layoutY="109.0" mnemonicParsing="false" onAction="#saveOnAction" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #192a56;" text="Save Customer" textFill="WHITE" />
       <TextField fx:id="txtAddress" layoutX="11.0" layoutY="109.0" prefHeight="26.0" prefWidth="129.0" promptText="Address" />
       <TextField fx:id="txtEmail" layoutX="152.0" layoutY="109.0" prefHeight="26.0" prefWidth="129.0" promptText="Email" />
    </children>

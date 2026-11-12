@@ -4,6 +4,7 @@ import com.pcl.pos.bo.custom.CustomerBo;
 import com.pcl.pos.bo.custom.impl.CustomerBoImpl;
 import com.pcl.pos.dto.request.CustomerRequestDto;
 import com.pcl.pos.dto.response.ResponseCustomerDto;
+import com.pcl.pos.entity.Customer;
 import com.pcl.pos.view.tm.CustomerTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +35,7 @@ public class CustomerManagementFormController {
     public TextField txtEmail;
     CustomerBo customerBo=new CustomerBoImpl();
 
+
     public void initialize(){
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -43,6 +45,23 @@ public class CustomerManagementFormController {
         colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
         colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
         loadCustomerTableData();
+
+        tblCustomer.getSelectionModel().selectedItemProperty()
+                .addListener((observable,oldValue,newValue)->{
+                    if (newValue!=null){
+                        setData((CustomerTm)newValue);
+                    }
+                });
+
+    }
+
+    private void setData(CustomerTm tm) {
+        txtAddress.setText(tm.getAddress());
+        txtContactNumber.setText(tm.getContact());
+        txtCustomerName.setText(tm.getName());
+        txtSalary.setText(tm.getSalary());
+        txtEmail.setText(tm.getEmail());
+        btnSave.setText("Update Customer");
 
     }
 
@@ -89,24 +108,52 @@ public class CustomerManagementFormController {
         }
     }
 
+
+
     public void saveOnAction(ActionEvent actionEvent) {
         try {
-           boolean isSaved= customerBo.save(new CustomerRequestDto(
-                    txtCustomerName.getText(),
-                    Double.parseDouble(txtSalary.getText()),
-                    txtContactNumber.getText(),
-                    txtAddress.getText(),
-                    txtEmail.getText()
+            if (btnSave.getText().equals("Save Customer")){
+                boolean isSaved= customerBo.save(new CustomerRequestDto(
+                        txtCustomerName.getText(),
+                        Double.parseDouble(txtSalary.getText()),
+                        txtContactNumber.getText(),
+                        txtAddress.getText(),
+                        txtEmail.getText()
 
-            ));
-            if (isSaved){
-                new Alert(Alert.AlertType.INFORMATION,"Customer saved").show();
-            }else {
-                new Alert(Alert.AlertType.WARNING,"Something went wrong please try again...").show();
+                ));
+                if (isSaved){
+                    loadCustomerTableData();
+                    clearFields();
+                    new Alert(Alert.AlertType.INFORMATION,"Customer saved").show();
+                }else {
+                    new Alert(Alert.AlertType.WARNING,"Something went wrong please try again...").show();
 
+                }
+            }else{
+                boolean isUpdated = customerBo.updateCustomer(new CustomerRequestDto(
+                        txtCustomerName.getText(),
+                        Double.parseDouble(txtSalary.getText()),
+                        txtContactNumber.getText(),
+                        txtAddress.getText(),
+                        txtEmail.getText()
+                ));
+                if (isUpdated){
+                    loadCustomerTableData();
+                    btnSave.setText("Save Customer");
+                    new Alert(Alert.AlertType.INFORMATION,"Customer Updated "+txtEmail.getText()).show();
+                    clearFields();
+                }
             }
+
         }catch (ClassNotFoundException | SQLException e){
             e.printStackTrace();
         }
+    }
+    public void clearFields(){
+        txtEmail.clear();
+        txtSalary.clear();
+        txtCustomerName.clear();
+        txtContactNumber.clear();
+        txtAddress.clear();
     }
 }
