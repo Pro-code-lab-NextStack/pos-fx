@@ -54,8 +54,24 @@ public  class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public Customer findById(String s) {
+    public Customer findById(String s) throws SQLException, ClassNotFoundException {
+        Connection con=DbConnection.getInstance().getConnection();
+        String sql="SELECT * FROM customer WHERE id=?";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.setString(1,s);
+        ResultSet set = preparedStatement.executeQuery();
+        if (set.next()){
+            return new Customer(
+                    set.getString(1),
+                    set.getString(2),
+                    set.getDouble(3),
+                    set.getString(4),
+                    set.getString(5),
+                    set.getString(6)
+            );
+        }
         return null;
+
     }
 
     @Override
@@ -76,5 +92,25 @@ public  class CustomerDaoImpl implements CustomerDao {
         ));
     }
     return customerList;
+    }
+
+    @Override
+    public Customer findCustomerByEmail(String email) throws SQLException, ClassNotFoundException {
+       Connection con=DbConnection.getInstance().getConnection();
+       String sql="SELECT * FROM customer WHERE email=?";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.setString(1,email);
+        ResultSet set = preparedStatement.executeQuery();
+        if (set.next()){
+            return new Customer(
+                    set.getString(1),
+                    set.getString(2),
+                    set.getDouble(3),
+                    set.getString(4),
+                    set.getString(5),
+                    set.getString(6)
+                    );
+        }
+        return null;
     }
 }
