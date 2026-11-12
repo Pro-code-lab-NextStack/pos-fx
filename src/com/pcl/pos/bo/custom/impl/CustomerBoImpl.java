@@ -44,4 +44,9 @@ public class CustomerBoImpl implements CustomerBo {
 
         return dtoList;
     }
+
+    @Override
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return customerDao.delete(id);
+    }
 }
