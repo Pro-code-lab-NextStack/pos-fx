@@ -37,7 +37,11 @@ public  class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public boolean delete(String s) throws SQLException, ClassNotFoundException {
-        return false;
+       Connection con=DbConnection.getInstance().getConnection();
+       String sql="DELETE FROM customer WHERE id=?";
+       PreparedStatement ps=con.prepareStatement(sql);
+       ps.setString(1,s);
+       return ps.executeUpdate()>0;
     }
 
     @Override
