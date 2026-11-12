@@ -1,5 +1,6 @@
 package com.pcl.pos.dao.custom.impl;
 
+import com.pcl.pos.dao.CrudUtill;
 import com.pcl.pos.dao.custom.UserDao;
 import com.pcl.pos.db.DbConnection;
 import com.pcl.pos.entity.Role;
@@ -78,11 +79,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean delete(String s) throws SQLException, ClassNotFoundException {
-       Connection connection =DbConnection.getInstance().getConnection();
        String sql="DELETE FROM user WHERE user_id=?";
-       PreparedStatement ps =connection.prepareStatement(sql);
-       ps.setString(1,s);
-      return ps.executeUpdate()>0;
+       return CrudUtill.execute(sql,s);
+
     }
 
     @Override
