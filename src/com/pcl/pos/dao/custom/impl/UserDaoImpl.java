@@ -92,11 +92,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> findAll() throws SQLException, ClassNotFoundException {
     List<User> userList=new ArrayList<>();
-   Connection connection =DbConnection.getInstance().getConnection();
    String sql="SELECT * FROM user";
-   PreparedStatement ps =connection.prepareStatement(sql);
-        ResultSet set = ps.executeQuery();
-
+   ResultSet set=CrudUtill.execute(sql);
         while (set.next()){
             userList.add(new User(
                 set.getString(1),
