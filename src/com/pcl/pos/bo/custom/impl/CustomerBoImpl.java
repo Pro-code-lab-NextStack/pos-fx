@@ -16,6 +16,10 @@ public class CustomerBoImpl implements CustomerBo {
     CustomerDao customerDao=new CustomerDaoImpl();
     @Override
     public boolean save(CustomerRequestDto dto) throws SQLException, ClassNotFoundException {
+        Customer customer=customerDao.findCustomerByEmail(dto.getEmail());
+        if (customer!=null){
+            return false;
+        }
       return   customerDao.save(new Customer(
                 UUID.randomUUID().toString(),
                 dto.getName(),
@@ -47,6 +51,28 @@ public class CustomerBoImpl implements CustomerBo {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return customerDao.delete(id);
+        Customer byId = customerDao.findById(id);
+        if (byId!=null){
+            return customerDao.delete(id);
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateCustomer(CustomerRequestDto dto,String id) throws SQLException, ClassNotFoundException {
+        Customer customerByEmail = customerDao.findCustomerByEmail(dto.getEmail());
+        if (customerByEmail!=null){
+           return customerDao.update(new Customer(
+                    id,
+                    dto.getName(),
+                    dto.getSalary(),
+                    dto.getContact(),
+                    dto.getAddress(),
+                    dto.getEmail()
+
+            ));
+        }
+        return false;
     }
 }
