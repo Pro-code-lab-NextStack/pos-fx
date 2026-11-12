@@ -61,9 +61,29 @@ public class CustomerManagementFormController {
                         dto.getAddress(),
                         btn
                 ));
-                tblCustomer.setItems(customerTms);
-            }
+                btn.setOnAction((event->{
+                    Alert alert=new Alert(Alert.AlertType.CONFIRMATION,
+                            "Are you sure you want to delete this customer",
+                            ButtonType.YES,ButtonType.NO);
+                    alert.showAndWait();
 
+                    if (alert.getResult()==ButtonType.YES){
+                        try {
+                            boolean isDeleted=customerBo.delete(dto.getId());
+                            if (isDeleted){
+                                new Alert(Alert.AlertType.INFORMATION,"Customer Deleted").show();
+                                loadCustomerTableData();
+                            }else {
+                                new Alert(Alert.AlertType.WARNING,"Something went wrong").show();
+
+                            }
+                        }catch (SQLException|ClassNotFoundException e){
+                            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                        }
+                    }
+                }));
+            }
+            tblCustomer.setItems(customerTms);
         } catch (SQLException |ClassNotFoundException e) {
             e.printStackTrace();
         }
