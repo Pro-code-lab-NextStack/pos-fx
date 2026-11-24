@@ -15,10 +15,12 @@ public class WelcomeCashierController {
     public Button btnLogout;
     public Button btnShiftStaus;
 
-    public void logoutOnAction(ActionEvent actionEvent) {
+    public void logoutOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("LoginForm");
     }
 
-    public void navigatePOSAreaOnAction(ActionEvent actionEvent) {
+    public void navigatePOSAreaOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("cashier/POSContext");
     }
 
     public void changeShiftStatusOnAction(ActionEvent actionEvent) {
@@ -40,9 +42,10 @@ public class WelcomeCashierController {
     }
     public void setUi(String location) throws IOException {
         Parent parent= FXMLLoader.load(getClass().getResource
-                ("/com/pcl/pos/view/cashier/"+location+".fxml"));
+                ("/com/pcl/pos/view/"+location+".fxml"));
         javafx.stage.Stage stage =(Stage)context.getScene().getWindow();
         stage.setScene(new Scene(parent));
+        stage.setMaximized(true);
 
     }
 }
