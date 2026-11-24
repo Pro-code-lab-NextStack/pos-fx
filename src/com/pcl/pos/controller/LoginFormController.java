@@ -34,7 +34,8 @@ public class LoginFormController {
                  new Alert(Alert.AlertType.INFORMATION,dto.getMessage()).show();
                  setUi("admin/SuperAdminForm");
              } else if (dto.getRoleName().equals("CASHIER")) {
-                 System.out.println("cashier login success..");
+                 new Alert(Alert.AlertType.INFORMATION,"welcome "+dto.getUserName());
+                 setUi("cashier/CashierWelcome");
              }
 
 
