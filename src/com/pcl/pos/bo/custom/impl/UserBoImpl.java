@@ -1,6 +1,7 @@
 package com.pcl.pos.bo.custom.impl;
 
 import com.pcl.pos.bo.custom.UserBo;
+import com.pcl.pos.dao.CrudUtill;
 import com.pcl.pos.dao.SuperDao;
 import com.pcl.pos.dao.custom.UserDao;
 import com.pcl.pos.dao.custom.impl.UserDaoImpl;
@@ -11,6 +12,7 @@ import com.pcl.pos.entity.Role;
 import com.pcl.pos.entity.User;
 import com.pcl.pos.utill.security.PasswordManager;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,21 +61,21 @@ public class UserBoImpl implements UserBo {
                return new ResponseUserDto(user.getEmail(),
                        user.getUserName(),
                        user.getUserId(),
-                       user.getRoleId(),
+                       getRoleNameById(user.getRoleId()),
                        200,
                        "done....");
            }
            return new ResponseUserDto(user.getEmail(),
                    user.getUserName(),
                    user.getUserId(),
-                   user.getRoleId(),
+                   getRoleNameById(user.getRoleId()),
                    401,
                    "Incorrect password please check your pwd....");
        }
       return   new ResponseUserDto(user.getEmail(),
                 user.getUserName(),
               user.getUserId(),
-              user.getRoleId(),
+              getRoleNameById(user.getRoleId()),
                 404,
                 "User not found");
     }
@@ -133,6 +135,11 @@ public class UserBoImpl implements UserBo {
         ));
 
 
+    }
+
+    @Override
+    public String getRoleNameById(String id) throws SQLException, ClassNotFoundException {
+      return userDao.getRoleNameById(id);
     }
 
 

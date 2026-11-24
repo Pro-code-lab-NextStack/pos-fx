@@ -10,4 +10,5 @@ import java.util.List;
 public interface UserDao extends CrudDao<User,String> {
     public User findByEmail(String email) throws SQLException, ClassNotFoundException;
     public List<Role> getAllRoles() throws SQLException, ClassNotFoundException;
+    public String getRoleNameById(String id) throws SQLException, ClassNotFoundException;
 }

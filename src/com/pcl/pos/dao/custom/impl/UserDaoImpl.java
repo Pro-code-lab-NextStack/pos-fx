@@ -46,6 +46,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public String getRoleNameById(String id) throws SQLException, ClassNotFoundException {
+        String sql="SELECT * FROM role WHERE id=?";
+        ResultSet set =CrudUtill.execute(sql,id);
+        if (set.next()){
+            return set.getString(2);
+        }
+        return null;
+    }
+
+    @Override
     public boolean save(User user) throws ClassNotFoundException, SQLException {
 
         Connection connection = DbConnection.getInstance().getConnection();

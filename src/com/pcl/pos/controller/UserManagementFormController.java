@@ -126,7 +126,7 @@ public class UserManagementFormController {
 
     public void saveOnAction(ActionEvent actionEvent) {
         try {
-            if (btnSave.getText()=="Save User"){
+            if (btnSave.getText().trim().equals("Save User")){
                 boolean isSaved= userBo.registerUser(new UserRequestDto(
                         txtUsrName.getText(),
                         txtEmail.getText(),
@@ -137,7 +137,8 @@ public class UserManagementFormController {
 
                 ));
                 if (isSaved){
-                    System.out.println("done");
+                   new Alert(Alert.AlertType.INFORMATION,"User Saved").show();
+                   setTableData();
                 }
             }else {
                 boolean isUpdated= userBo.updateUser(new UserRequestDto(

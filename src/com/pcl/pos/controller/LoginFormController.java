@@ -28,9 +28,16 @@ public class LoginFormController {
     public void loginOnAction(ActionEvent actionEvent) throws IOException {
         try {
          ResponseUserDto dto =userBo.login(new UserRequestDto(null,txtEmail.getText(),txtPwd.getText(),null,null));
+            System.out.println(dto.getRoleName());
          if (dto.getCode()==200){
-             new Alert(Alert.AlertType.INFORMATION,dto.getMessage()).show();
-             setUi("admin/SuperAdminForm");
+             if (dto.getRoleName().equals("ADMIN")){
+                 new Alert(Alert.AlertType.INFORMATION,dto.getMessage()).show();
+                 setUi("admin/SuperAdminForm");
+             } else if (dto.getRoleName().equals("CASHIER")) {
+                 System.out.println("cashier login success..");
+             }
+
+
          } else if (dto.getCode()==401) {
              new Alert(Alert.AlertType.WARNING,dto.getMessage()).show();
 
