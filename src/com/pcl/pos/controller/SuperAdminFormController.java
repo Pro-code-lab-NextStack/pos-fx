@@ -32,7 +32,7 @@ public class SuperAdminFormController {
         dynamicContext.getChildren().add(
                 FXMLLoader.load(
                         getClass().getResource
-                                ("/com/pcl/pos/view/"+location+".fxml"))
+                                ("/com/pcl/pos/view/admin/"+location+".fxml"))
         );
     }
 
