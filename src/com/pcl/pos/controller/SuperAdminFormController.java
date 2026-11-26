@@ -37,4 +37,7 @@ public class SuperAdminFormController {
     }
 
 
+    public void navigateVendorManagementOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("VendorManagementForm");
+    }
 }
